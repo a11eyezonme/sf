@@ -62,10 +62,10 @@ do
     check_installation tor
     check_installation obfs4proxy
     check_installation privoxy
-    bridges
     echo "UseBridges 1" >> /etc/tor/torrc
     echo "ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy" >> /etc/tor/torrc
     sudo sed -i '/#        forward-socks5t/s/^#//g' /etc/privoxy/config
+    bridges
     ;;
     *)
     echo "specify argument"
@@ -91,6 +91,10 @@ if [[ -n $(service $VAR status | grep 'inactive') ]]
 then
     service $VAR start
     echo "Starting $VAR service..."
+elif [[ -n $(service $VAR status | grep 'active' ) ]]
+then
+    echo "$VAR already started, restarting..."
+    service $VAR restart
 fi
 }
 
