@@ -63,8 +63,8 @@ do
     check_installation obfs4proxy
     check_installation privoxy
     bridges
-    echo "UseBridges 1" >> /etc/tor/torcc
-    echo "ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy" >> /etc/tor/torcc
+    echo "UseBridges 1" >> /etc/tor/torrc
+    echo "ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy" >> /etc/tor/torrc
     sudo sed -i '/#        forward-socks5t/s/^#//g' /etc/privoxy/config
     ;;
     *)
