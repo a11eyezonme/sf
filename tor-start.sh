@@ -76,8 +76,10 @@ echo -e "  \033[1;32m-f\033[0m   \033[1;37mFull installation (installs TOR, obfs
 echo -e "  \033[1;32m-b\033[0m   \033[1;37mAdd bridges to the /etc/tor/torrc file\033[0m"
 echo -e "  \033[1;32m-h\033[0m   \033[1;37mDisplay this help message\033[0m"
 echo ""
+echo -e "\033[1;34mWritten by: \033[4;35ma11eyezonme\033[0m"
 echo -e "\033[1;36m========================================\033[0m"
 }
+
 
 
 
