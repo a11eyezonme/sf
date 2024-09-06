@@ -2,6 +2,7 @@
 
 ### Check Installed dependencies 
 
+
 check_installation()
 {
 VAR=$1    
@@ -19,9 +20,11 @@ else
         ;;
         [Nn])
         echo -e "\033[1;31mInstallation interrupted. A $VAR must be installed for the script to work.\033[0m"
+        echo -e "\033[1;32m run $0 -h for additional information 033[0m"
         ;;
         *)
         echo "\033[1;31mInstallation interrupted\033[0m"
+        echo -e "\033[1;32m run $0 -h for additional information 033[0m"
         ;;
     esac
 fi
@@ -49,6 +52,35 @@ case $ask in
 esac
 }
 
+### Help
+
+help()
+{
+echo -e "\033[1;36m========================================\033[0m"
+echo -e "\033[1;33m Automated TOR Connection Script \033[0m"
+echo -e "\033[1;36m========================================\033[0m"
+echo ""
+echo -e "\033[1;32mThis script automates the process of establishing a connection over TOR.\033[0m"
+echo -e "\033[1;32mIt saves you time by avoiding manual installation of components.\033[0m"
+echo ""
+echo -e "\033[1;34m- You must use \033[1;31msudo\033[1;34m to ensure correct installation of all components.\033[0m"
+echo -e "\033[1;34m- To set the proxy for the current terminal session, you need to \033[1;31msource $0\033[1;34m the script.\033[0m"
+echo -e "\033[1;34m  Example: \033[1;31msource $0\033[0m"
+echo -e "\033[1;34m- Running the script without options will simply start its regular functionality.\033[0m"
+echo ""
+echo -e "\033[1;34mUsage:\033[0m"
+echo -e "  \033[1;31msudo\033[0m $0 [\033[1;32moptions\033[0m]"
+echo ""
+echo -e "\033[1;34mOptions:\033[0m"
+echo -e "  \033[1;32m-f\033[0m   \033[1;37mFull installation (installs TOR, obfs4proxy, privoxy)\033[0m"
+echo -e "  \033[1;32m-b\033[0m   \033[1;37mAdd bridges to the /etc/tor/torrc file\033[0m"
+echo -e "  \033[1;32m-h\033[0m   \033[1;37mDisplay this help message\033[0m"
+echo ""
+echo -e "\033[1;36m========================================\033[0m"
+}
+
+
+
 ### Check argument
 
 for arg in $@
@@ -66,6 +98,10 @@ do
     echo "ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy" >> /etc/tor/torrc
     sudo sed -i '/#        forward-socks5t/s/^#//g' /etc/privoxy/config
     bridges
+    ;;
+    -h)
+    help
+    exit 1
     ;;
     *)
     echo "specify argument"
